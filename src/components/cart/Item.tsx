@@ -47,9 +47,7 @@ class Item extends React.Component<Props> {
       <Div inOverlay={this.props.inOverlay}>
         <div className="details">
           <div className="flex flex-col">
-            <h2 className="font-600 mb-1 h2" style={{ marginTop: "0" }}>
-              {brand}
-            </h2>
+            <h2 className="font-600 mb-1 h2">{brand}</h2>
             <div className="h2 font-400 h2 mb-2-1">{name}</div>
 
             <div className="price mb-2-1">{this.setPrice()}</div>
@@ -138,7 +136,9 @@ const Div = styled.div`
   display: grid;
   padding-bottom: 1.5rem;
   padding-top: 1.5rem;
-
+  & .h2 {
+    margin-top: 0;
+  }
   ${(props: DivProps) => {
     if (props.inOverlay) {
       return css`

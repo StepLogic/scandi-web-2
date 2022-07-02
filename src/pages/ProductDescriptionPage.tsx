@@ -57,6 +57,11 @@ class ProductDescriptionPage extends React.Component<Props, State> {
       });
     }
   };
+  inStock = () => {
+    //@ts-ignore
+    const { inStock } = this.state.product;
+    return inStock;
+  };
   checkAllAttributesSelected = () => {
     // let includesElements = false;
     //@ts-ignore
@@ -155,16 +160,24 @@ class ProductDescriptionPage extends React.Component<Props, State> {
             ))}
           </div>
           <div className="product-details">
-            <img
-              alt="product "
-              loading="lazy"
-              className={"product-image"}
-              src={
-                this.state.currentImage === ""
-                  ? this.state.product.gallery[0]
-                  : this.state.currentImage
-              }
-            />
+            <div className="image">
+              <img
+                alt="product "
+                loading="lazy"
+                className={"product-image"}
+                src={
+                  this.state.currentImage === ""
+                    ? this.state.product.gallery[0]
+                    : this.state.currentImage
+                }
+              />
+              <div className="overlayProduct">
+                <span className="fill">
+                  {this.inStock() ? "" : "Out of Stock"}
+                </span>
+              </div>
+            </div>
+
             <div className="product-details-text">
               <h2 className="font-600 mb-1">{this.state.product.brand}</h2>
               <div className="h2 font-400 mb-3">{this.state.product.name}</div>
@@ -204,6 +217,28 @@ class ProductDescriptionPage extends React.Component<Props, State> {
 ProductDescriptionPage.contextType = AppContext;
 const Div = styled.div`
   padding-top: 5rem;
+  & ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 50px;
+  }
+
+  /* Track */
+  & ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+  }
+
+  /* Handle */
+  & ::-webkit-scrollbar-thumb {
+    background: #555;
+    height: 40px;
+    border-radius: 100px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
   & .layout {
     display: grid;
     grid-template-columns: 1fr 11fr;
@@ -248,10 +283,10 @@ const Div = styled.div`
     max-height: calc(90vh - var(--navbar-height));
   }
 
-  & .product-image {
+  /* & .product-image {
     width: 100%;
     height: calc(90vh - var(--navbar-height));
-  }
+  } */
 
   & .selectors {
     display: flex;
@@ -279,6 +314,46 @@ const Div = styled.div`
     font-weight: 700;
     font-size: 1.5rem;
     line-height: 100%;
+  }
+  .image {
+    width: 100%;
+    height: calc(90vh - var(--navbar-height));
+    position: relative;
+    background: white;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+    & .fill {
+      width: 100%;
+      height: 100%;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 160%;
+      color: #8d8f9a;
+      display: flex;
+      align-items: center;
+      background: white;
+      justify-content: center;
+    }
+    & .overlayProduct {
+      position: absolute;
+      top: 0;
+      z-index: 4;
+      width: 100%;
+      height: 100%;
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 160%;
+      color: #8d8f9a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 `;
 export default ProductDescriptionPage;

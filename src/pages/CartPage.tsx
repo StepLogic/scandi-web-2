@@ -47,6 +47,28 @@ CartPage.contextType = AppContext;
 const Div = styled.div`
   padding-top: 5rem;
   position: relative;
+  & ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 50px;
+  }
+
+  /* Track */
+  & ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+  }
+
+  /* Handle */
+  & ::-webkit-scrollbar-thumb {
+    background: #555;
+    height: 40px;
+    border-radius: 100px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
   /* height: calc(900vh - var(--navbar-height)); */
   & .title {
     font-family: "Raleway";

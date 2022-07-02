@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Button from "../common/Button";
 import Item from "./Item";
 import { AppContext } from "../../contexts/Provider";
-import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import { CartItem } from "../../contexts/Interface";
 type Props = {
@@ -76,16 +75,18 @@ class Cart extends React.Component<Props> {
               ).toFixed(2)}`}</p>
             </div>
             <div className="flex flex-row justify-between">
-              <Link to="/cart">
-                <Button
-                  variant="secondary"
-                  size="md"
-                  className="summary-button"
-                  onClick={() => provider.toggleCart(false)}
-                >
-                  VIEW BAG
-                </Button>
-              </Link>
+              <Button
+                variant="secondary"
+                size="md"
+                className="summary-button"
+                onClick={() => {
+                  provider.toggleCart(false);
+                  window.location.assign("/cart");
+                }}
+              >
+                VIEW BAG
+              </Button>
+
               <Button size="md" className="summary-button" variant="primary">
                 CHECK OUT
               </Button>
@@ -104,6 +105,28 @@ const Div = styled.div`
   /* @media only screen and (max-width: 1240px) {
     margin-right: 10%;
   } */
+  & ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 50px;
+  }
+
+  /* Track */
+  & ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+  }
+
+  /* Handle */
+  & ::-webkit-scrollbar-thumb {
+    background: #555;
+    height: 40px;
+    border-radius: 100px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
   & .bag {
     /* width: 20.3125rem;
     max-height: 42.3125rem; */
